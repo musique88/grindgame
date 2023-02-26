@@ -19,8 +19,6 @@ class Scene
 
 	Terrain terrain;
 
-	TextureAtlas textureAtlas;
-
 public:
 	Scene();
 

@@ -3,10 +3,10 @@
 
 class Terrain {
     SimplexNoise noise;
-    Texture2D &atlas;
+    Texture2D atlas;
 
 public:
-    explicit Terrain(Texture2D &textureAtlas);
+    explicit Terrain();
     void move(Vector2 position);
     void update();
 	void render();

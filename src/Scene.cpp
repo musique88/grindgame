@@ -5,8 +5,7 @@
 #include "Scene.h"
 
 
-Scene::Scene()
-		: textureAtlas(LoadTexture("res/tilemap_packed.png"), Vector2{.x=12, .y=11}), terrain(textureAtlas.atlas) {}
+Scene::Scene() {}
 
 Scene::~Scene()
 {
@@ -16,7 +15,7 @@ Scene::~Scene()
 
 int Scene::createEntity(EntityType type, Vector2 position)
 {
-	Entity *newEntity = Entity::createEntity(type, position, textureAtlas);
+	Entity *newEntity = Entity::createEntity(type, position);
 	int id = addEntity(newEntity);
 
 	return id;

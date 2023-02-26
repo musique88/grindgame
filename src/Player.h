@@ -7,11 +7,13 @@
 
 
 #include "Entity.h"
+#include "TextureAtlas.h"
 
 class Player : public Entity
 {
+	TextureAtlas texture;
 public:
-	Player(const Vector2 &position, TextureAtlas &texture);
+	Player(const Vector2 &position);
 
 	void update() override;
 

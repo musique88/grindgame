@@ -4,9 +4,10 @@
 
 #include <raylib.h>
 #include "Player.h"
-#include "TextureAtlas.h"
+#include "ResManager.h"
 
-Player::Player(const Vector2 &position, TextureAtlas &textureAtlas) : Entity(PLAYER, position, {.x = 25, .y = 50}, textureAtlas) {}
+Player::Player(const Vector2 &position)
+		: Entity(PLAYER, position, {.x = 25, .y = 50}), texture(ResManager::getInstance().getTextureAtlas(ATLAS_TINY_DUNGEON)) {}
 
 void Player::update()
 {
@@ -15,5 +16,5 @@ void Player::update()
 
 void Player::render()
 {
-	textureAtlas.renderSprite((int) AtlasIndex::PLAYER, position);
+	texture.renderSprite((int) AtlasIndex::PLAYER, position);
 }

@@ -8,8 +8,8 @@
 
 static int entityCount = 0;
 
-Entity::Entity(EntityType type, Vector2 position, Vector2 renderSize, TextureAtlas &textureAtlas)
-		: id(entityCount++), type(type), position(position), renderSize(renderSize), textureAtlas(textureAtlas) {}
+Entity::Entity(EntityType type, Vector2 position, Vector2 renderSize)
+		: id(entityCount++), type(type), position(position), renderSize(renderSize) {}
 
 void Entity::deleteEntity(Entity *entity)
 {
@@ -20,14 +20,15 @@ void Entity::deleteEntity(Entity *entity)
 	}
 }
 
-Entity *Entity::createEntity(EntityType type, Vector2 position, TextureAtlas &textureAtlas)
+
+Entity *Entity::createEntity(EntityType type, Vector2 position)
 {
 	Entity *newEntity = nullptr;
 
 	switch (type)
 	{
 		case PLAYER:
-			newEntity = new Player(position, textureAtlas);
+			newEntity = static_cast<Entity *>(new Player(position));
 	}
 
 	return newEntity;

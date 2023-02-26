@@ -15,7 +15,9 @@ add_executable(${PROJECT_NAME}
         src/SimplexNoise.cpp
         src/SimplexNoise.h
         src/TextureAtlas.cpp
-        src/TextureAtlas.h)
+        src/TextureAtlas.h
+        src/ResManager.cpp
+        src/ResManager.h)
 
 target_link_libraries(${PROJECT_NAME} raylib)
 
