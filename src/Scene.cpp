@@ -4,6 +4,12 @@
 
 #include "Scene.h"
 
+
+Scene::Scene()
+		: textureAtlas(LoadTexture("tilemap_packed.png")), terrain(textureAtlas)
+{}
+
+
 int Scene::createEntity(EntityType type, Vector2 position)
 {
 	Entity *newEntity = Entity::createEntity(type, position);
@@ -16,7 +22,7 @@ int Scene::deleteEntity(int id)
 {
 	auto it = entities.find(id);
 
-	if(it == entities.end())
+	if (it == entities.end())
 		return -1;
 
 	Entity::deleteEntity(it->second);
@@ -32,14 +38,20 @@ int Scene::addEntity(Entity *entity)
 
 void Scene::update()
 {
-	for(auto entity : entities){
+	for (auto entity: entities)
+	{
 		entity.second->update();
 	}
 }
 
 void Scene::render()
 {
-	for(auto entity : entities){
+	terrain.render();
+
+	for (auto entity: entities)
+	{
 		entity.second->render();
 	}
+
+	DrawFPS(0, 0);
 }

@@ -9,13 +9,19 @@
 #include <vector>
 #include <unordered_map>
 #include "Entity.h"
+#include "Terrain.h"
 
 class Scene
 {
 	// <id, ptr>
 	std::unordered_map<int, Entity *> entities;
 
+	Terrain terrain;
+
+	Texture2D textureAtlas;
+
 public:
+	Scene();
 	/**
 	 * Create a entity
 	 * @return The new entity id or -1 if an error occurred
