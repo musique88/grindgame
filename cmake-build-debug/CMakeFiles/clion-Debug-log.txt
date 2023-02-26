@@ -1,0 +1,4 @@
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=make -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -G "CodeBlocks - Unix Makefiles" -S /home/tursh/dev/grindgame -B /home/tursh/dev/grindgame/cmake-build-debug
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/tursh/dev/grindgame/cmake-build-debug
