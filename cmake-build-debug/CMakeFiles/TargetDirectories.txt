@@ -1,3 +1,0 @@
-/home/tursh/dev/grindgame/cmake-build-debug/CMakeFiles/GrindGame.dir
-/home/tursh/dev/grindgame/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/tursh/dev/grindgame/cmake-build-debug/CMakeFiles/rebuild_cache.dir
