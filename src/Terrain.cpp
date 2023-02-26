@@ -2,10 +2,9 @@
 #include <raylib.h>
 #include <iostream>
 
-Terrain::Terrain()
-    :noise(1, 100)
+Terrain::Terrain(Texture2D &textureAtlas)
+    :noise(1, 100), atlas(textureAtlas)
 {
-    atlas = LoadTexture("tilemap_packed.png");
 }
 
 unsigned int Terrain::getTile(Vector2 position) {
@@ -27,5 +26,16 @@ void Terrain::drawTile(Rectangle screenPosition, Vector2 mapPosition) {
         1.f, 
         WHITE
     );
+}
+
+void Terrain::render()
+{
+	for (int j = 0; j < 20; j++)
+	{
+		for (int i = 0; i < 20; i++)
+		{
+			drawTile({(float) j * 20, (float) i * 20, 20, 20}, {(float) j / 20.f, (float) i / 10.f});
+		}
+	}
 }
 
