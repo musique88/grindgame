@@ -11,7 +11,7 @@
 class Player : public Entity
 {
 public:
-	Player(const Vector2 &position);
+	Player(const Vector2 &position, TextureAtlas &texture);
 
 	void update() override;
 

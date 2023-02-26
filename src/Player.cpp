@@ -4,8 +4,9 @@
 
 #include <raylib.h>
 #include "Player.h"
+#include "TextureAtlas.h"
 
-Player::Player(const Vector2 &position) : Entity(PLAYER, position, {.x = 25, .y = 50}) {}
+Player::Player(const Vector2 &position, TextureAtlas &textureAtlas) : Entity(PLAYER, position, {.x = 25, .y = 50}, textureAtlas) {}
 
 void Player::update()
 {
@@ -14,5 +15,5 @@ void Player::update()
 
 void Player::render()
 {
-	DrawRectangleV(position, renderSize, BLUE);
+	textureAtlas.renderSprite((int) AtlasIndex::PLAYER, position);
 }

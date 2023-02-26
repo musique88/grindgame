@@ -6,13 +6,17 @@
 
 
 Scene::Scene()
-		: textureAtlas(LoadTexture("tilemap_packed.png")), terrain(textureAtlas)
-{}
+		: textureAtlas(LoadTexture("res/tilemap_packed.png"), Vector2{.x=12, .y=11}), terrain(textureAtlas.atlas) {}
 
+Scene::~Scene()
+{
+	for (auto entity: entities)
+		Entity::deleteEntity(entity.second);
+}
 
 int Scene::createEntity(EntityType type, Vector2 position)
 {
-	Entity *newEntity = Entity::createEntity(type, position);
+	Entity *newEntity = Entity::createEntity(type, position, textureAtlas);
 	int id = addEntity(newEntity);
 
 	return id;

@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include "Entity.h"
 #include "Terrain.h"
+#include "TextureAtlas.h"
 
 class Scene
 {
@@ -18,10 +19,13 @@ class Scene
 
 	Terrain terrain;
 
-	Texture2D textureAtlas;
+	TextureAtlas textureAtlas;
 
 public:
 	Scene();
+
+	~Scene();
+
 	/**
 	 * Create a entity
 	 * @return The new entity id or -1 if an error occurred
