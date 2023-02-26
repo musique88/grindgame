@@ -4,6 +4,7 @@
 
 #include "TextureAtlas.h"
 
+
 TextureAtlas::TextureAtlas(Texture2D atlasTexture, Vector2 atlasSize)
 		: atlas(atlasTexture), atlasSize(atlasSize),
 		  spriteSize({.x = (float) atlasTexture.width / atlasSize.x, .y = (float) atlasTexture.height / atlasSize.y})

@@ -5,6 +5,7 @@
 #ifndef GRINDGAME_ENTITY_H
 #define GRINDGAME_ENTITY_H
 
+#include <optional>
 #include <raylib.h>
 #include "TextureAtlas.h"
 
@@ -16,18 +17,17 @@ enum EntityType
 class Entity
 {
 public:
-	explicit Entity(EntityType type, Vector2 position, Vector2 renderSize, TextureAtlas &textureAtlas);
+	explicit Entity(EntityType type, Vector2 position, Vector2 renderSize);
 
 	const int id;
 	const EntityType type;
 	Vector2 position;
 	Vector2 renderSize;
-	TextureAtlas &textureAtlas;
 
 	virtual void update() = 0;
 	virtual void render() = 0;
 
-	static Entity *createEntity(EntityType type, Vector2 position, TextureAtlas &textureAtlas);
+	static Entity *createEntity(EntityType type, Vector2 position);
 	static void deleteEntity(Entity *entity);
 };
 
