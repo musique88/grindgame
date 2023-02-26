@@ -13,6 +13,11 @@ unsigned int Terrain::getTile(Vector2 position)
 	return noise.noise(position.x, position.y) > 0.5 ? 1 : 0;
 }
 
+void Terrain::move(Vector2 position) 
+{
+    this->position = position;
+}
+
 Rectangle getRectangleFromIndex(unsigned int index)
 {
 	return {((float) (index % 12)) * 16, ((float) (index / 12)) * 16, 16, 16};
@@ -32,13 +37,18 @@ void Terrain::drawTile(Rectangle screenPosition, Vector2 mapPosition)
 	);
 }
 
+void Terrain::update()
+{
+
+}
+
 void Terrain::render()
 {
-	for (int j = 0; j < 20; j++)
+	for (int j = position.y - (renderSize / 2); j < position.y + (renderSize / 2); j++)
 	{
-		for (int i = 0; i < 20; i++)
+		for (int i = position.x - (renderSize / 2); i < position.x + (renderSize / 2); i++)
 		{
-			drawTile({(float) j * 20, (float) i * 20, 20, 20}, {(float) j / 20.f, (float) i / 10.f});
+			drawTile({(float) i * 20, (float) j * 20, 20, 20}, {(float) i / 20.f, (float) j / 10.f});
 		}
 	}
 }

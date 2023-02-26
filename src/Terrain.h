@@ -1,9 +1,13 @@
 #include <raylib.h>
 #include "SimplexNoise.h"
 
+const unsigned int renderSize = 75;
+
 class Terrain {
     SimplexNoise noise;
     Texture2D atlas;
+
+    Vector2 position;
 
 public:
     explicit Terrain();

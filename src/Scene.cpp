@@ -41,6 +41,7 @@ int Scene::addEntity(Entity *entity)
 
 void Scene::update()
 {
+    terrain.update();
 	for (auto entity: entities)
 	{
 		entity.second->update();
