@@ -18,6 +18,9 @@ int Scene::createEntity(EntityType type, Vector2 position)
 	Entity *newEntity = Entity::createEntity(type, position);
 	int id = addEntity(newEntity);
 
+	if(type == PLAYER)
+		player = dynamic_cast<Player *>(newEntity);
+
 	return id;
 }
 
@@ -41,21 +44,28 @@ int Scene::addEntity(Entity *entity)
 
 void Scene::update()
 {
-    terrain.update();
 	for (auto entity: entities)
 	{
 		entity.second->update();
 	}
+	terrain.move(player->position);
+	terrain.update();
 }
 
 void Scene::render()
 {
+	camera.target = player->position;
+
+
+	BeginMode2D(camera);
+
 	terrain.render();
 
 	for (auto entity: entities)
 	{
 		entity.second->render();
 	}
+	EndMode2D();
 
 	DrawFPS(0, 0);
 }

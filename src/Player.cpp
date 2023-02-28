@@ -11,7 +11,16 @@ Player::Player(const Vector2 &position)
 
 void Player::update()
 {
-
+	if(IsKeyDown(KEY_W))
+	{
+		position.y--;
+	} if(IsKeyDown(KEY_A)){
+		position.x--;
+	} if(IsKeyDown(KEY_S)){
+		position.y++;
+	} if(IsKeyDown(KEY_D)){
+		position.x++;
+	}
 }
 
 void Player::render()

@@ -11,6 +11,10 @@
 #include "Entity.h"
 #include "Terrain.h"
 #include "TextureAtlas.h"
+#include "Player.h"
+
+#define WINDOW_HEIGHT 720
+#define WINDOW_WIDTH 438
 
 class Scene
 {
@@ -18,6 +22,10 @@ class Scene
 	std::unordered_map<int, Entity *> entities;
 
 	Terrain terrain;
+
+	Player *player;
+
+	Camera2D camera{.offset={WINDOW_HEIGHT/2, WINDOW_WIDTH/2}, .target={0, 0}, .rotation=0, .zoom=1};
 
 public:
 	Scene();

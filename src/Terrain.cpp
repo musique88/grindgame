@@ -4,7 +4,7 @@
 #include <iostream>
 
 Terrain::Terrain()
-		: noise(1, 100), atlas(ResManager::getInstance().getTexture(ResManager::TINY_DUNGEON_TEXTURE))
+		: noise(1, 100), atlas(ResManager::getInstance().getTextureAtlas(ATLAS_TINY_DUNGEON))
 {
 }
 
@@ -15,20 +15,15 @@ unsigned int Terrain::getTile(Vector2 position)
 
 void Terrain::move(Vector2 position) 
 {
-    this->position = position;
-}
-
-Rectangle getRectangleFromIndex(unsigned int index)
-{
-	return {((float) (index % 12)) * 16, ((float) (index / 12)) * 16, 16, 16};
+	Vector2 tilePosition = {.x=position.x/atlas.spriteSize.x, .y=position.y/atlas.spriteSize.y};
+    this->position = tilePosition;
 }
 
 void Terrain::drawTile(Rectangle screenPosition, Vector2 mapPosition)
 {
-	Rectangle rect = getRectangleFromIndex(getTile(mapPosition) == 1 ? 14 : 0);
 	DrawTextureTiled(
-			atlas,
-			getRectangleFromIndex(getTile(mapPosition) == 1 ? 14 : 0),
+			atlas.atlas,
+			atlas.getAtlasCoords(getTile(mapPosition) == 1 ? 14 : 0),
 			screenPosition,
 			{(float) 0, (float) 0},
 			0.f,
