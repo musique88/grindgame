@@ -52,10 +52,17 @@ void Scene::update()
 	terrain.update();
 }
 
+void setCameraTarget(Camera2D* cam, Vector2 playerPosition) 
+{
+	float factor = 0.5;
+	Vector2 mpos = GetMousePosition();
+	cam->target.x = playerPosition.x + mpos.x * factor - GetScreenWidth() * factor / 2.0;
+	cam->target.y = playerPosition.y + mpos.y * factor - GetScreenHeight() * factor / 2.0;
+}
+
 void Scene::render()
 {
-	camera.target = player->position;
-
+	setCameraTarget(&camera, player->position);
 
 	BeginMode2D(camera);
 
