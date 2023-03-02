@@ -45,7 +45,7 @@ void Terrain::render()
 	{
 		for (int i = position.x - (renderSize / 2); i < position.x + (renderSize / 2); i++)
 		{
-			drawTile({(float) i * 20, (float) j * 20, 20, 20}, {(float) i / 20.f, (float) j / 10.f});
+			drawTile({(float) i * TILE_SIZE, (float) j * TILE_SIZE, TILE_SIZE, TILE_SIZE}, {(float) i / NOISE_SCALE_X, (float) j / NOISE_SCALE_Y});
 		}
 	}
 }
