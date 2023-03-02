@@ -1,0 +1,7 @@
+
+#define TILE_SIZE 20
+#define TILE_SIZE_IN_ATLAS 16
+
+#define MOUSE_FACTOR 0.5f
+#define CHARACTER_SPEED 1.f
+

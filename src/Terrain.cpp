@@ -2,6 +2,8 @@
 #include "ResManager.h"
 #include <raylib.h>
 #include <iostream>
+#include "Constants.h"
+#include "TextureAtlas.h"
 
 Terrain::Terrain()
 		: noise(1, 100), atlas(ResManager::getInstance().getTextureAtlas(ATLAS_TINY_DUNGEON))
@@ -15,7 +17,7 @@ unsigned int Terrain::getTile(Vector2 position)
 
 void Terrain::move(Vector2 position) 
 {
-	Vector2 tilePosition = {.x=position.x/atlas.spriteSize.x, .y=position.y/atlas.spriteSize.y};
+	Vector2 tilePosition = {.x=position.x/TILE_SIZE, .y=position.y/TILE_SIZE};
     this->position = tilePosition;
 }
 
@@ -23,7 +25,7 @@ void Terrain::drawTile(Rectangle screenPosition, Vector2 mapPosition)
 {
 	DrawTextureTiled(
 			atlas.atlas,
-			atlas.getAtlasCoords(getTile(mapPosition) == 1 ? 14 : 0),
+			atlas.getAtlasCoords(getTile(mapPosition) == 1 ? (int)AtlasIndex::STONE_BLOCK: (int)AtlasIndex::DIRT_GROUND),
 			screenPosition,
 			{(float) 0, (float) 0},
 			0.f,

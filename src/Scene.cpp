@@ -3,6 +3,7 @@
 //
 
 #include "Scene.h"
+#include "Constants.h"
 
 
 Scene::Scene() {}
@@ -54,7 +55,7 @@ void Scene::update()
 
 void setCameraTarget(Camera2D* cam, Vector2 playerPosition) 
 {
-	float factor = 0.5;
+	float factor = MOUSE_FACTOR;
 	Vector2 mpos = GetMousePosition();
 	cam->target.x = playerPosition.x + mpos.x * factor - GetScreenWidth() * factor / 2.0;
 	cam->target.y = playerPosition.y + mpos.y * factor - GetScreenHeight() * factor / 2.0;
