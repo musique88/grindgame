@@ -15,6 +15,8 @@
  *		7 8 9
  */
 enum class AtlasIndex {
+    DIRT_GROUND = 0,
+    STONE_BLOCK = 14,
 	PLAYER = 84
 };
 

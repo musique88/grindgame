@@ -3,6 +3,7 @@
 //
 
 #include "Scene.h"
+#include "Constants.h"
 
 
 Scene::Scene() {}
@@ -17,6 +18,9 @@ int Scene::createEntity(EntityType type, Vector2 position)
 {
 	Entity *newEntity = Entity::createEntity(type, position);
 	int id = addEntity(newEntity);
+
+	if(type == PLAYER)
+		player = dynamic_cast<Player *>(newEntity);
 
 	return id;
 }
@@ -45,16 +49,31 @@ void Scene::update()
 	{
 		entity.second->update();
 	}
+	terrain.move(player->position);
+	terrain.update();
+}
+
+void setCameraTarget(Camera2D* cam, Vector2 playerPosition) 
+{
+	float factor = MOUSE_FACTOR;
+	Vector2 mpos = GetMousePosition();
+	cam->target.x = playerPosition.x + mpos.x * factor - GetScreenWidth() * factor / 2.0;
+	cam->target.y = playerPosition.y + mpos.y * factor - GetScreenHeight() * factor / 2.0;
 }
 
 void Scene::render()
 {
+	setCameraTarget(&camera, player->position);
+
+	BeginMode2D(camera);
+
 	terrain.render();
 
 	for (auto entity: entities)
 	{
 		entity.second->render();
 	}
+	EndMode2D();
 
 	DrawFPS(0, 0);
 }

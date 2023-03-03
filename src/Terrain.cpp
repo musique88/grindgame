@@ -2,9 +2,11 @@
 #include "ResManager.h"
 #include <raylib.h>
 #include <iostream>
+#include "Constants.h"
+#include "TextureAtlas.h"
 
 Terrain::Terrain()
-		: noise(1, 100), atlas(ResManager::getInstance().getTexture(ResManager::TINY_DUNGEON_TEXTURE))
+		: noise(1, 100), atlas(ResManager::getInstance().getTextureAtlas(ATLAS_TINY_DUNGEON))
 {
 }
 
@@ -13,17 +15,17 @@ unsigned int Terrain::getTile(Vector2 position)
 	return noise.noise(position.x, position.y) > 0.5 ? 1 : 0;
 }
 
-Rectangle getRectangleFromIndex(unsigned int index)
+void Terrain::move(Vector2 position) 
 {
-	return {((float) (index % 12)) * 16, ((float) (index / 12)) * 16, 16, 16};
+	Vector2 tilePosition = {.x=position.x/TILE_SIZE, .y=position.y/TILE_SIZE};
+    this->position = tilePosition;
 }
 
 void Terrain::drawTile(Rectangle screenPosition, Vector2 mapPosition)
 {
-	Rectangle rect = getRectangleFromIndex(getTile(mapPosition) == 1 ? 14 : 0);
 	DrawTextureTiled(
-			atlas,
-			getRectangleFromIndex(getTile(mapPosition) == 1 ? 14 : 0),
+			atlas.atlas,
+			atlas.getAtlasCoords(getTile(mapPosition) == 1 ? (int)AtlasIndex::STONE_BLOCK: (int)AtlasIndex::DIRT_GROUND),
 			screenPosition,
 			{(float) 0, (float) 0},
 			0.f,
@@ -32,13 +34,18 @@ void Terrain::drawTile(Rectangle screenPosition, Vector2 mapPosition)
 	);
 }
 
+void Terrain::update()
+{
+
+}
+
 void Terrain::render()
 {
-	for (int j = 0; j < 20; j++)
+	for (int j = position.y - (renderSize / 2); j < position.y + (renderSize / 2); j++)
 	{
-		for (int i = 0; i < 20; i++)
+		for (int i = position.x - (renderSize / 2); i < position.x + (renderSize / 2); i++)
 		{
-			drawTile({(float) j * 20, (float) i * 20, 20, 20}, {(float) j / 20.f, (float) i / 10.f});
+			drawTile({(float) i * TILE_SIZE, (float) j * TILE_SIZE, TILE_SIZE, TILE_SIZE}, {(float) i / NOISE_SCALE_X, (float) j / NOISE_SCALE_Y});
 		}
 	}
 }
